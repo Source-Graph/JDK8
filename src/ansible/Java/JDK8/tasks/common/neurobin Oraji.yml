@@ -1,0 +1,9 @@
+- ansible.builtin.include_role:
+    name: Java/neurobin Oraji
+
+- name: install JDK with Oraji
+  ansible.builtin.shell: "oraji {{file_name}}"
+  args:
+    chdir: "{{language_java}}/"
+    creates: /usr/bin/java
+  become: true

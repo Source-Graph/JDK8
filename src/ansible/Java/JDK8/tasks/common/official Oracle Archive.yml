@@ -1,0 +1,16 @@
+
+- name: Create query directory
+  ansible.builtin.file:
+    path: "{{language_java}}"
+    state: directory
+
+# "download JDK without login" gist: https://gist.github.com/wavezhang/ba8425f24a968ec9b2a8619d7c2d86a6
+
+- name: download JDK 8 without login
+  ansible.builtin.get_url:
+    url: "{{download_url}}"
+    dest: "{{language_java}}/{{file_name}}"
+    headers:
+      Cookie: oraclelicense=accept-securebackup-cookie
+
+- include_tasks: "common/{{install_method}}.yml"
